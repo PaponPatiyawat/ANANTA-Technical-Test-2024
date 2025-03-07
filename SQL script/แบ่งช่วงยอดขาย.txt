@@ -1,0 +1,16 @@
+SELECT
+    CASE
+        WHEN s.price <= 29999 THEN '0-29,999'
+        WHEN s.price BETWEEN 30000 AND 59999 THEN '30,000-59,999'
+        WHEN s.price BETWEEN 60000 AND 99999 THEN '60,000-99,999'
+        WHEN s.price BETWEEN 100000 AND 199999 THEN '100,000-199,999'
+        WHEN s.price >= 200000 THEN '200,000 ขึ้นไป'
+    END AS sales_range,
+    COUNT(s.sale_id) AS number_of_sales,
+    SUM(s.price) AS total_sales
+FROM 
+    sale AS s
+GROUP BY 
+    sales_range
+ORDER BY 
+    sales_range;
